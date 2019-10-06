@@ -26,8 +26,9 @@ public class TestConfig {
     public static RequestSpecification football_requestSpec;
 
     @BeforeAll
-    public static void setup(){
+    public static void setup() {
 
+        System.out.println("BeforeAll setup() method start");
         RestAssured.proxy("localhost", 8888); //comment out if not running tests through a proxy
 
         RestAssured.baseURI= BASE_URI;
@@ -56,6 +57,8 @@ public class TestConfig {
                 expectResponseTime(lessThan(2000L)).
                 build();
         RestAssured.responseSpecification = responseSpec;
+
+        System.out.println("BeforeAll setup() method end");
     }
 
     @AfterEach

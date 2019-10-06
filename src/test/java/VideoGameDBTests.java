@@ -4,6 +4,7 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class VideoGameDBTests extends TestConfig {
 
@@ -40,4 +41,14 @@ public class VideoGameDBTests extends TestConfig {
                     statusCode(HttpStatus.SC_OK);
     }
 
+    @Test
+    public void validateByJsonSchema() {
+        given().
+                spec(videoGame_requestSpec).
+                pathParam("videoGameId", 2).
+                when().
+                get(EndPoint.SINGLE_VIDEOGAME).
+                then().
+                body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
+    }
 }
