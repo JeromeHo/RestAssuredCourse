@@ -41,6 +41,7 @@ public class VideoGameDBTests extends TestConfig {
                     statusCode(HttpStatus.SC_OK);
     }
 
+    //validate the response against the schema
     @Test
     public void validateByJsonSchema() {
         given().
